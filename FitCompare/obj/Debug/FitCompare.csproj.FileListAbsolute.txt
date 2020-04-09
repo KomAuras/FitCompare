@@ -1,0 +1,13 @@
+C:\Users\mixer\Documents\Visual Studio 2019\Projects\FitCompare\FitCompare\bin\Debug\FitCompare.exe.config
+C:\Users\mixer\Documents\Visual Studio 2019\Projects\FitCompare\FitCompare\bin\Debug\FitCompare.exe
+C:\Users\mixer\Documents\Visual Studio 2019\Projects\FitCompare\FitCompare\bin\Debug\FitCompare.pdb
+C:\Users\mixer\Documents\Visual Studio 2019\Projects\FitCompare\FitCompare\obj\Debug\FitCompare.csprojAssemblyReference.cache
+C:\Users\mixer\Documents\Visual Studio 2019\Projects\FitCompare\FitCompare\obj\Debug\FitCompare.MainForm.resources
+C:\Users\mixer\Documents\Visual Studio 2019\Projects\FitCompare\FitCompare\obj\Debug\FitCompare.Properties.Resources.resources
+C:\Users\mixer\Documents\Visual Studio 2019\Projects\FitCompare\FitCompare\obj\Debug\FitCompare.csproj.GenerateResource.cache
+C:\Users\mixer\Documents\Visual Studio 2019\Projects\FitCompare\FitCompare\obj\Debug\FitCompare.csproj.CoreCompileInputs.cache
+C:\Users\mixer\Documents\Visual Studio 2019\Projects\FitCompare\FitCompare\obj\Debug\FitCompare.exe
+C:\Users\mixer\Documents\Visual Studio 2019\Projects\FitCompare\FitCompare\obj\Debug\FitCompare.pdb
+C:\Users\mixer\Documents\Visual Studio 2019\Projects\FitCompare\FitCompare\bin\Debug\SharpClipboard.dll
+C:\Users\mixer\Documents\Visual Studio 2019\Projects\FitCompare\FitCompare\bin\Debug\SharpClipboard.xml
+C:\Users\mixer\Documents\Visual Studio 2019\Projects\FitCompare\FitCompare\obj\Debug\FitCompare.csproj.CopyComplete
