@@ -26,7 +26,7 @@ namespace FitCompare
 
         private void ClipboardChanged(Object sender, ClipboardChangedEventArgs e)
         {
-            if (e.ContentType == SharpClipboard.ContentTypes.Text)
+            if (e.ContentType == SharpClipboard.ContentTypes.Text && clipboard.ClipboardText[0] == '[')
             {
                 list.SetText(clipboard.ClipboardText);
             }

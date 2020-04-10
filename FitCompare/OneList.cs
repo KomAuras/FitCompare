@@ -46,6 +46,8 @@ namespace FitCompare
              */
             int blockNumber = 1;
             int prevBlockNumber = 1;
+            bool CaptionExists = false;
+            CompareItem.ItemTypes itemType = CompareItem.ItemTypes.Empty;
             items.Clear();
             foreach (string line in Regex.Split(buffer, "\r\n|\r|\n"))
             {
@@ -56,43 +58,50 @@ namespace FitCompare
                 }
                 else
                 {
-                    CompareItem item = new CompareItem(line);
+                    if (prevBlockNumber != blockNumber)
+                    {
+                        CompareItem emptyItem = new CompareItem();
+                        emptyItem.ItemType = CompareItem.ItemTypes.Empty;
+                        items.Add(emptyItem);
+                    }
+                    /* TODO: обычно все в фите делится по пробелам 
+                     * low,med,high,rigs,subsystems через пробел
+                     * затем два пробела и
+                     * дроны с карго череез пробел
+                     * если слот пустое пишется [Empty (grade) slot]
+                     * но если нет подсистемы то там просто пусто.
+                     * нужно это как то отработать
+                     */
                     switch (blockNumber)
                     {
                         case 1:
-                            if (line[0] == '[')
-                            {
-                                item.ItemType = CompareItem.ItemTypes.Caption;
-                                item.SetCompareText(line.Substring(1, line.IndexOf(',') - 1));
+                            if (line[0] == '[' && !CaptionExists) { 
+                                itemType = CompareItem.ItemTypes.Caption;
+                                CaptionExists = true;
                             }
                             else
-                                item.ItemType = CompareItem.ItemTypes.LowSlot;
+                                itemType = CompareItem.ItemTypes.LowSlot;
                             break;
                         case 2:
-                            item.ItemType = CompareItem.ItemTypes.MidSlot;
+                            itemType = CompareItem.ItemTypes.MidSlot;
                             break;
                         case 3:
-                            item.ItemType = CompareItem.ItemTypes.HighSlot;
+                            itemType = CompareItem.ItemTypes.HighSlot;
                             break;
                         case 4:
-                            item.ItemType = CompareItem.ItemTypes.Rigs;
+                            itemType = CompareItem.ItemTypes.Rigs;
                             break;
                         case 5:
-                            item.ItemType = CompareItem.ItemTypes.Subsystems;
+                            itemType = CompareItem.ItemTypes.Subsystems;
                             break;
-                        case 6:
-                            item.ItemType = CompareItem.ItemTypes.Drones;
+                        case 7:
+                            itemType = CompareItem.ItemTypes.Drones;
                             break;
                         case 8:
-                            item.ItemType = CompareItem.ItemTypes.Cargo;
+                            itemType = CompareItem.ItemTypes.Cargo;
                             break;
                     }
-                    if (prevBlockNumber != blockNumber)
-                    {
-                        CompareItem separator = new CompareItem();
-                        separator.ItemType = CompareItem.ItemTypes.Empty;
-                        items.Add(separator);
-                    }
+                    CompareItem item = new CompareItem(line, itemType);
                     items.Add(item);
                     prevBlockNumber = blockNumber;
                 }

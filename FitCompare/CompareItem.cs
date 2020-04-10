@@ -1,4 +1,8 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace FitCompare
 {
@@ -20,6 +24,7 @@ namespace FitCompare
         public Image ItemTypeIcon { get; set; }
         public Image MatchedIcon { get; set; }
         public string RawText { get; set; }
+        public int Qty { get; set; }
         private ItemTypes _ItemType;
         public ItemTypes ItemType
         {
@@ -33,11 +38,41 @@ namespace FitCompare
         public string CompareText;
         public bool Matched;
 
-        public CompareItem(string text = "")
+        public CompareItem(string text = "", ItemTypes it = CompareItem.ItemTypes.Empty)
         {
             RawText = text;
             CompareText = text;
-            SetItemTypeIcon(ItemTypes.Empty);
+            Qty = 0;
+            switch (it)
+            {
+                case ItemTypes.Caption:
+                    SetCompareText(text.Substring(1, text.IndexOf(',') - 1));
+                    break;
+                case ItemTypes.LowSlot:
+                case ItemTypes.MidSlot:
+                case ItemTypes.HighSlot:
+                case ItemTypes.Subsystems:
+                case ItemTypes.Rigs:
+                    if (text[0] == '[')
+                    {
+                        RawText = "";
+                        SetCompareText("");
+                    }
+                    break;
+                case ItemTypes.Drones:
+                case ItemTypes.Cargo:
+                    string lastWord = text.Split(' ').Last();
+                    if (Regex.IsMatch(lastWord, "^x(\\d*)$", RegexOptions.IgnoreCase))
+                    {
+                        Match match = Regex.Match(lastWord, "(\\d*)$", RegexOptions.IgnoreCase);
+                        Qty = Int32.Parse(match.Value);
+                        string onlyName = text.Substring(0, text.LastIndexOf(" ") < 0 ? 0 : text.LastIndexOf(" "));
+                        RawText = "x" + match.Value + " " + onlyName;
+                        CompareText = onlyName;
+                    }
+                    break;
+            }
+            ItemType = it;
             SetMatchedIcon(false);
         }
 
