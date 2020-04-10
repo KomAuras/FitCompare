@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Text.RegularExpressions;
@@ -36,6 +37,30 @@ namespace FitCompare
             buffer = text;
             Parse();
             FillListBox();
+            Compare();
+        }
+
+        private void Compare()
+        {
+            if (next == null)
+                return;
+            foreach (CompareItem item in items)
+            {
+                if (item.ItemType == CompareItem.ItemTypes.Empty)
+                    continue;
+                foreach (CompareItem itemNext in next.items)
+                {
+                    if (itemNext.ItemType == CompareItem.ItemTypes.Empty)
+                        continue;
+                    if (!itemNext.Matched && itemNext.CompareText == item.CompareText && itemNext.Qty == item.Qty)
+                    {
+                        item.SetMatched(true);
+                        itemNext.SetMatched(true);
+                        break;
+                    }
+                }
+
+            }
         }
 
         private void Parse()

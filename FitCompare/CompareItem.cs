@@ -46,6 +46,7 @@ namespace FitCompare
             switch (it)
             {
                 case ItemTypes.Caption:
+                    // TODO: тут проблемы если закачивается не фит!
                     SetCompareText(text.Substring(1, text.IndexOf(',') - 1));
                     break;
                 case ItemTypes.LowSlot:
@@ -73,7 +74,7 @@ namespace FitCompare
                     break;
             }
             ItemType = it;
-            SetMatchedIcon(false);
+            SetMatched(false);
         }
 
         public void SetCompareText(string text)
@@ -106,9 +107,10 @@ namespace FitCompare
             }
         }
 
-        public void SetMatchedIcon(bool state)
+        public void SetMatched(bool matched)
         {
-            if (state)
+            Matched = matched;
+            if (matched)
                 MatchedIcon = Properties.Resources.matched_small;
             else
                 MatchedIcon = Properties.Resources.transparent_small;
