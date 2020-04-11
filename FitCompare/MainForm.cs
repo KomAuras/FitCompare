@@ -18,8 +18,8 @@ namespace FitCompare
             SetupDataGrid(ListDataGrid2);
 
             manager = new ClipboardManager();
-            OneList list1 = new OneList(ListDataGrid1);
-            OneList list2 = new OneList(ListDataGrid2);
+            CompareItemsList list1 = new CompareItemsList(ListDataGrid1);
+            CompareItemsList list2 = new CompareItemsList(ListDataGrid2);
             list2.SetNext(list1);
             manager.SetList(list2);
 
@@ -66,11 +66,13 @@ namespace FitCompare
             textColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dg.Columns.Add(textColumn);
 
+            /*
             DataGridViewTextBoxColumn textColumn1 = new DataGridViewTextBoxColumn();
             textColumn1.HeaderText = "TEMP";
             textColumn1.DataPropertyName = "ItemType";
             textColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dg.Columns.Add(textColumn1);
+            */
         }
 
         private void checkBoxTopMost_CheckStateChanged(object sender, System.EventArgs e)

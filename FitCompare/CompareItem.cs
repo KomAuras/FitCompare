@@ -21,6 +21,14 @@ namespace FitCompare
             Cargo
         }
 
+        public enum MatchTypes
+        {
+            Empty,
+            Matched,
+            MatchedWithoutQty,
+            NotMatched
+        }
+
         public Image ItemTypeIcon { get; set; }
         public Image MatchedIcon { get; set; }
         public string RawText { get; set; }
@@ -36,7 +44,7 @@ namespace FitCompare
             }
         }
         public string CompareText;
-        public bool Matched;
+        public MatchTypes Matched;
 
         public CompareItem(string text = "", ItemTypes it = CompareItem.ItemTypes.Empty)
         {
@@ -47,7 +55,8 @@ namespace FitCompare
             {
                 case ItemTypes.Caption:
                     // TODO: тут проблемы если закачивается не фит!
-                    SetCompareText(text.Substring(1, text.IndexOf(',') - 1));
+                    if (text.Length > 0)
+                        SetCompareText(text.Substring(1, text.IndexOf(',') - 1));
                     break;
                 case ItemTypes.LowSlot:
                 case ItemTypes.MidSlot:
@@ -74,7 +83,7 @@ namespace FitCompare
                     break;
             }
             ItemType = it;
-            SetMatched(false);
+            SetMatched();
         }
 
         public void SetCompareText(string text)
@@ -107,13 +116,24 @@ namespace FitCompare
             }
         }
 
-        public void SetMatched(bool matched)
+        public void SetMatched(MatchTypes mt = MatchTypes.Empty)
         {
-            Matched = matched;
-            if (matched)
-                MatchedIcon = Properties.Resources.matched_small;
-            else
-                MatchedIcon = Properties.Resources.transparent_small;
+            Matched = mt;
+            switch (mt)
+            {
+                case MatchTypes.NotMatched:
+                    MatchedIcon = Properties.Resources.bullet_red;
+                    break;
+                case MatchTypes.MatchedWithoutQty:
+                    MatchedIcon = Properties.Resources.bullet_yellow;
+                    break;
+                case MatchTypes.Matched:
+                    MatchedIcon = Properties.Resources.bullet_green;
+                    break;
+                default:
+                    MatchedIcon = Properties.Resources.transparent_small;
+                    break;
+            }
         }
     }
 }

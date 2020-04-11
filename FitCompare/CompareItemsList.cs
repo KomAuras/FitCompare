@@ -7,14 +7,14 @@ using System.Windows.Forms;
 
 namespace FitCompare
 {
-    class OneList
+    class CompareItemsList
     {
         private DataGridView control;
-        private OneList next;
+        private CompareItemsList next;
         private string buffer = "";
         private List<CompareItem> items;
 
-        public OneList(DataGridView list)
+        public CompareItemsList(DataGridView list)
         {
             SetList(list);
             items = new List<CompareItem>();
@@ -25,7 +25,7 @@ namespace FitCompare
             this.control = control;
         }
 
-        public void SetNext(OneList list)
+        public void SetNext(CompareItemsList list)
         {
             next = list;
         }
@@ -42,8 +42,14 @@ namespace FitCompare
 
         private void Compare()
         {
+            foreach (CompareItem item in items) { 
+                item.SetMatched(CompareItem.MatchTypes.Empty);
+            }
             if (next == null)
                 return;
+            foreach (CompareItem item in next.items) { 
+                item.SetMatched(CompareItem.MatchTypes.Empty);
+            }
             foreach (CompareItem item in items)
             {
                 if (item.ItemType == CompareItem.ItemTypes.Empty)
@@ -52,14 +58,38 @@ namespace FitCompare
                 {
                     if (itemNext.ItemType == CompareItem.ItemTypes.Empty)
                         continue;
-                    if (!itemNext.Matched && itemNext.CompareText == item.CompareText && itemNext.Qty == item.Qty)
+                    if (itemNext.Matched != CompareItem.MatchTypes.Matched &&
+                        itemNext.Matched != CompareItem.MatchTypes.MatchedWithoutQty &&
+                        itemNext.CompareText == item.CompareText &&
+                        itemNext.ItemType == item.ItemType)
                     {
-                        item.SetMatched(true);
-                        itemNext.SetMatched(true);
+                        if (itemNext.Qty == item.Qty)
+                        {
+                            item.SetMatched(CompareItem.MatchTypes.Matched);
+                            itemNext.SetMatched(CompareItem.MatchTypes.Matched);
+                        }
+                        else
+                        {
+                            item.SetMatched(CompareItem.MatchTypes.MatchedWithoutQty);
+                            itemNext.SetMatched(CompareItem.MatchTypes.MatchedWithoutQty);
+                        }
                         break;
                     }
                 }
 
+            }
+            if (next.items.Count > 0)
+            {
+                foreach (CompareItem item in items)
+                {
+                    if (item.Matched == CompareItem.MatchTypes.Empty && item.ItemType != CompareItem.ItemTypes.Empty)
+                        item.SetMatched(CompareItem.MatchTypes.NotMatched);
+                }
+            }
+            foreach (CompareItem item in next.items)
+            {
+                if (item.Matched == CompareItem.MatchTypes.Empty && item.ItemType != CompareItem.ItemTypes.Empty)
+                    item.SetMatched(CompareItem.MatchTypes.NotMatched);
             }
         }
 

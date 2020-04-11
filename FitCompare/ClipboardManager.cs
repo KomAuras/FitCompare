@@ -10,7 +10,7 @@ namespace FitCompare
 {
     class ClipboardManager
     {
-        private OneList list;
+        private CompareItemsList list;
         private SharpClipboard clipboard;
 
         public ClipboardManager()
@@ -19,7 +19,7 @@ namespace FitCompare
             clipboard.ClipboardChanged += ClipboardChanged;
         }
 
-        public void SetList(OneList list)
+        public void SetList(CompareItemsList list)
         {
             this.list = list;
         }

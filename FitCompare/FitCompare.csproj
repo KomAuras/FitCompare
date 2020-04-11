@@ -57,7 +57,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OneList.cs" />
+    <Compile Include="CompareItemsList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainForm.resx">
@@ -95,6 +95,18 @@
     <None Include="Resources\slot_high_small.png" />
     <None Include="Resources\state_active_small.png" />
     <None Include="Resources\slot_subsystem_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\state_offline_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bullet_green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bullet_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bullet_yellow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

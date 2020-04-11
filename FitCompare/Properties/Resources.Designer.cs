@@ -63,9 +63,49 @@ namespace FitCompare.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bullet_green {
+            get {
+                object obj = ResourceManager.GetObject("bullet_green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bullet_red {
+            get {
+                object obj = ResourceManager.GetObject("bullet_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bullet_yellow {
+            get {
+                object obj = ResourceManager.GetObject("bullet_yellow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap matched_small {
             get {
                 object obj = ResourceManager.GetObject("matched_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap not_matched_small {
+            get {
+                object obj = ResourceManager.GetObject("not_matched_small", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
