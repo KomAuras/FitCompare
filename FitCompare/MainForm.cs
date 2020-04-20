@@ -6,6 +6,7 @@ namespace FitCompare
     public partial class MainForm : Form
     {
         private ClipboardManager manager;
+        private AppSettings config;
         public MainForm()
         {
             InitializeComponent();
@@ -13,7 +14,6 @@ namespace FitCompare
 
         private void MainForm_Load(object sender, System.EventArgs e)
         {
-            //TopMost = true;
             SetupDataGrid(ListDataGrid1);
             SetupDataGrid(ListDataGrid2);
 
@@ -23,17 +23,19 @@ namespace FitCompare
             list2.SetNext(list1);
             manager.SetList(list2);
 
-            // добавляем чекбокс в тулбар
+            // Load settings
+            config = new AppSettings();
+
+            // Add checkbox
             CheckBox checkBoxTopMost = new CheckBox();
+            checkBoxTopMost.DataBindings.Add(new Binding("Checked", config, "StayOnTop"));
             checkBoxTopMost.Text = "Stay on top";
-            checkBoxTopMost.Checked = TopMost;
             checkBoxTopMost.CheckStateChanged += checkBoxTopMost_CheckStateChanged;
             checkBoxTopMost.BackColor = Color.Transparent;
+
             ToolStripControlHost controlHost = new ToolStripControlHost(checkBoxTopMost);
             controlHost.Alignment = ToolStripItemAlignment.Right;
             StripTools.Items.Add(controlHost);
-            /////// 
-            manager.SetText("[Typhoon Fleet Issue, Fleet Issue 10/10 test]\nIFFA Compact Damage Control\nDrone Damage Amplifier II\nDrone Damage Amplifier II\nDrone Damage Amplifier II\nBallistic Control System II\nBallistic Control System II\nBallistic Control System II\n\nGist X-Type Explosive Deflection Field\nAdaptive Invulnerability Field II\nLarge Cap Battery II\nGist X-Type Large Shield Booster\nLarge Micro Jump Drive\n\nCruise Missile Launcher II\nCruise Missile Launcher II\nCruise Missile Launcher II\nCruise Missile Launcher II\nCruise Missile Launcher II\nCruise Missile Launcher II\n\nLarge Warhead Rigor Catalyst I\nLarge Capacitor Control Circuit I\nLarge Capacitor Control Circuit I\n\n\n\nRepublic Fleet Berserker x2\n\nScourge Cruise Missile x162");
         }
 
         private void SetupDataGrid(DataGridView dg)
@@ -83,6 +85,12 @@ namespace FitCompare
         private void ButtonTest_Click(object sender, System.EventArgs e)
         {
             manager.SetText("[Typhoon Fleet Issue, Fleet Issue 10/10 test]\nIFFA Compact Damage Control\nDrone Damage Amplifier II\nDrone Damage Amplifier II\nDrone Damage Amplifier II\nBallistic Control System II\nBallistic Control System II\nBallistic Control System II\n\nGist X-Type Explosive Deflection Field\nAdaptive Invulnerability Field II\nLarge Cap Battery II\nGist X-Type Large Shield Booster\nLarge Micro Jump Drive\n\nCruise Missile Launcher II\nCruise Missile Launcher II\nCruise Missile Launcher II\nCruise Missile Launcher II\nCruise Missile Launcher II\nCruise Missile Launcher II\n\nLarge Warhead Rigor Catalyst I\nLarge Capacitor Control Circuit I\nLarge Capacitor Control Circuit I\n\n\n\nRepublic Fleet Berserker x2\n\nScourge Cruise Missile x162");
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //config.SaveState(this);
+            config.Save();
         }
     }
 }

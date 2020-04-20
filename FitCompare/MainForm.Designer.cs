@@ -143,8 +143,10 @@
             this.Controls.Add(this.BackPanel);
             this.Controls.Add(this.StripTools);
             this.Controls.Add(this.StripStatus);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Fit Compare";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Split.Panel1.ResumeLayout(false);
             this.Split.Panel2.ResumeLayout(false);

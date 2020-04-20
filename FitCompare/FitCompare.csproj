@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>FitCompare.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="SharpClipboard, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpClipboard.3.3.0\lib\SharpClipboard.dll</HintPath>
@@ -49,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppSettings.cs" />
     <Compile Include="ClipboardManager.cs" />
     <Compile Include="CompareItem.cs" />
     <Compile Include="MainForm.cs">
@@ -107,6 +111,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bullet_yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FitCompare.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

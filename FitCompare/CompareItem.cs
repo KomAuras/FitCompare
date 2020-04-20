@@ -54,8 +54,7 @@ namespace FitCompare
             switch (it)
             {
                 case ItemTypes.Caption:
-                    // TODO: тут проблемы если закачивается не фит!
-                    if (text.Length > 0)
+                    if (text.Length > 1)
                         SetCompareText(text.Substring(1, text.IndexOf(',') - 1));
                     break;
                 case ItemTypes.LowSlot:

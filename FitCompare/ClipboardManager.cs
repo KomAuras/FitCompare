@@ -28,6 +28,7 @@ namespace FitCompare
         {
             if (e.ContentType == SharpClipboard.ContentTypes.Text && clipboard.ClipboardText[0] == '[')
             {
+                // TODO: как то тут проверить фит это или не фит!
                 list.SetText(clipboard.ClipboardText);
             }
         }
