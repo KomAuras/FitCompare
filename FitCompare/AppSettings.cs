@@ -10,7 +10,7 @@ namespace FitCompare
     public class AppSettings : ApplicationSettingsBase
     {
         [UserScopedSetting()]
-        [DefaultSettingValue("0")]
+        [DefaultSettingValue("false")]
         public bool StayOnTop
         {
             get
