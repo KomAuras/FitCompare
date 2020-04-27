@@ -23,3 +23,4 @@ C:\Users\SEA\Documents\Visual Studio 2017\Projects\FitCompare\FitCompare\obj\Deb
 C:\Users\SEA\Documents\Visual Studio 2017\Projects\FitCompare\FitCompare\obj\Debug\FitCompare.csproj.CopyComplete
 C:\Users\SEA\Documents\Visual Studio 2017\Projects\FitCompare\FitCompare\obj\Debug\FitCompare.exe
 C:\Users\SEA\Documents\Visual Studio 2017\Projects\FitCompare\FitCompare\obj\Debug\FitCompare.pdb
+C:\Users\SEA\Documents\Visual Studio 2017\Projects\FitCompare\FitCompare\obj\Debug\FitCompare.csproj.CoreCompileInputs.cache

@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace FitCompare
@@ -7,6 +9,8 @@ namespace FitCompare
     {
         private ClipboardManager manager;
         private AppSettings config;
+        private NotifyIcon tray = new NotifyIcon();
+
         public MainForm()
         {
             InitializeComponent();
@@ -14,6 +18,14 @@ namespace FitCompare
 
         private void MainForm_Load(object sender, System.EventArgs e)
         {
+            //tray
+            Resize += MainForm_Resize;
+            Disposed += MainForm_Disposed;
+            tray.Visible = true;
+            tray.BalloonTipTitle = Text;
+            tray.Icon = System.Drawing.SystemIcons.Information;
+            tray.MouseDoubleClick += Tray_MouseDoubleClick;
+
             SetupDataGrid(ListDataGrid1);
             SetupDataGrid(ListDataGrid2);
 
@@ -36,6 +48,27 @@ namespace FitCompare
             ToolStripControlHost controlHost = new ToolStripControlHost(checkBoxTopMost);
             controlHost.Alignment = ToolStripItemAlignment.Right;
             StripTools.Items.Add(controlHost);
+        }
+
+        private void Tray_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+                WindowState = FormWindowState.Normal;
+            Activate();
+            ShowInTaskbar = true;
+        }
+
+        private void MainForm_Resize(object sender, System.EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                ShowInTaskbar = false;
+            }
+        }
+
+        private void MainForm_Disposed(object sender, System.EventArgs e)
+        {
+            tray.Visible = false;
         }
 
         private void SetupDataGrid(DataGridView dg)
